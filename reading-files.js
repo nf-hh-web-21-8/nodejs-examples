@@ -1,10 +1,9 @@
-import {promises as fs} from "fs";
+import { readFile } from "fs/promises";
 
+readFile("foo", "utf-8").then(content => {
+	console.log(content);
+});
 
-fs.readFile("foon","utf-8").then(content => {
-    console.log(content)
-})
-
-fs.readFile("some.json","utf-8").then(content => {
-    console.log(JSON.parse(content))
-})
+readFile("some.json", "utf-8").then(content => {
+	console.log(JSON.parse(content));
+});

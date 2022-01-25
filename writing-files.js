@@ -1,22 +1,25 @@
-import {promises as fs} from "fs";
+import { writeFile } from "fs/promises";
 
-fs.writeFile("foo", "bar");
+void writeFile("foo", "bar");
 
 const someData = {
-    users: [{
-        id: 1,
-        name: "Max Middleton",
-        password: "secret"
-    }, {
-        id: 2,
-        name: "Kim Whitmore",
-        password: "secret"
-    },
-        {
-            id: 1,
-            name: "Alex Lopez",
-            password: "secret"
-        }]
-}
+	users: [
+		{
+			id: 1,
+			name: "Max Middleton",
+			password: "secret",
+		},
+		{
+			id: 2,
+			name: "Kim Whitmore",
+			password: "secret",
+		},
+		{
+			id: 1,
+			name: "Alex Lopez",
+			password: "secret",
+		},
+	],
+};
 
-fs.writeFile("some.json", JSON.stringify(someData, null, 4))
+void writeFile("some.json", JSON.stringify(someData, null, 4));

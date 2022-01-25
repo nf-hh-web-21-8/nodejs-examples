@@ -1,40 +1,64 @@
-import {promises as fs} from "fs";
-import {v4 as uuid} from "uuid";
+import { readFile, writeFile } from "fs/promises";
+import { v4 as uuid } from "uuid";
 
 const getArgs = () => {
-    const [,,...args] = process.argv;
-    return args;
-}
-const fileName = "db.json";
-const init =  () => {
-   fs.writeFile(fileName, JSON.stringify({users:[]}))
-}
-const addUser = async (name) => {
-    const previous = await fs.readFile(fileName, "utf-8");
-    const previousData = JSON.parse(previous);
-    previousData.users.push({name, id: uuid()});
-    await fs.writeFile(fileName, JSON.stringify(previousData))
-}
+	const [, , ...args] = process.argv;
+	return args;
+};
 
-const removeUser = async (id) => {
-    const previous = await fs.readFile(fileName, "utf-8");
-    const previousData = JSON.parse(previous);
-    previousData.users.splice(previousData.users.findIndex(user => user.id === id));
-    await fs.writeFile(fileName, JSON.stringify(previousData))
-}
+const fileName = "db.json";
+
+/**
+ * Initializes the database with a model
+ * @return {Promise<void>}
+ * @example
+ * init({users: []})
+ */
+const init = async model => {
+	return writeFile(fileName, JSON.stringify(model));
+};
+
+/**
+ * Adds a user to the collection.
+ * @param {string} name
+ * @return {Promise<void>}
+ * @example
+ * addUser("Max")
+ */
+const addUser = async name => {
+	const previous = await readFile(fileName, "utf-8");
+	const previousData = JSON.parse(previous);
+	previousData.users.push({ name, id: uuid() });
+	return writeFile(fileName, JSON.stringify(previousData));
+};
+
+/**
+ * Remover a user from the collection.
+ * @param {string} id
+ * @return {Promise<void>}
+ * @example
+ * removeUser("b9460cd0-b323-4c50-a623-271c658851f7")
+ */
+const removeUser = async id => {
+	const previous = await readFile(fileName, "utf-8");
+	const previousData = JSON.parse(previous);
+	const index = previousData.users.findIndex(user => user.id === id);
+	previousData.users.splice(index);
+	return writeFile(fileName, JSON.stringify(previousData));
+};
 
 const [action, data] = getArgs();
 
-switch(action) {
-    case "init":
-        init(data);
-        break;
-    case "remove":
-        removeUser(data);
-        break;
-    case "add":
-        addUser(data)
-        break;
-    default:
-        console.log("not implemented")
+switch (action) {
+	case "init":
+		void init({ users: [] });
+		break;
+	case "remove":
+		void removeUser(data);
+		break;
+	case "add":
+		void addUser(data);
+		break;
+	default:
+		console.log("not implemented");
 }
