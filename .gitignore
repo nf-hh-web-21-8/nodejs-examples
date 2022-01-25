@@ -31,3 +31,6 @@ npm-debug.log*
 foo
 db.json
 some.json
+
+out/*
+!out/.gitkeep
