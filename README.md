@@ -1,7 +1,7 @@
 # nodejs-examples
 
 
-1. Project Setup
+1. ## Project Setup
 
 **As a Developer,  
 I need a development environment,  
@@ -19,7 +19,7 @@ AC:
 > ```
 
 
-2. Hello World
+2. ## Hello World
 
 **As a User,  
 I want to execute a file,  
@@ -35,10 +35,10 @@ AC:
 > ```
 > See [index.js](./index.js)
 
-3. Write files
+3. ## Write files
 
-**As a User,
-I want to write files,
+**As a User,  
+I want to write files,  
 so that I can read them later.**
 
 AC:
@@ -57,10 +57,10 @@ AC:
 > ```
 > See [writing-files.js](./writing-files.js)
 
-4. Read files
+4. ## Read files
 
-**As a User,
-I want to read files,
+**As a User,  
+I want to read files,  
 so that I can use the content.**
 
 AC:
@@ -80,10 +80,10 @@ AC:
 > See [reading-files.js](./reading-files.js)
 
 
-5. Use arguments
+5. ## Use arguments
 
-**As a User,
-I want to pass arguments to my script,
+**As a User,  
+I want to pass arguments to my script,  
 so that I can use it in my operations.**
 
 AC:
